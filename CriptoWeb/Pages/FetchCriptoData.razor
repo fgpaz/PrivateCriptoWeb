@@ -1,0 +1,59 @@
+﻿@page "/usdt"
+@using DataAccess
+@using Models
+@inject ExchangesAccess ExchangesAccess
+
+<PageTitle>Weather forecast</PageTitle>
+
+<h1>Cripto</h1>
+
+
+@if (exchanges == null)
+{
+    <p>
+        <em>Loading...</em>
+    </p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Exchange</th>
+            <th>Date</th>
+            <th>Comprar USDT</th>
+            <th>Vender USDT</th>
+            <th>Vender USDT + 2%</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var data in exchanges)
+        {
+            <tr>
+                <td>@data.exchange</td>
+                <td>@data.fecha</td>
+                <td>@data.comprar_USDT</td>
+                <td>@data.vender_USDT</td>
+                @if (data.exchange == "Belo")
+                {
+                    <td>@(data.vender_USDT * 1.02)</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<CriptoBase>? exchanges;
+
+    protected override async Task OnInitializedAsync()
+    {
+        exchanges = await ExchangesAccess.GetUSDTExchanges();
+    }
+
+}
