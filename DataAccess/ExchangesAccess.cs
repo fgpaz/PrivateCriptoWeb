@@ -18,11 +18,11 @@ public sealed class ExchangesAccess : WebAccess
         resultado.Buenbit!.exchange = "Buenbit";
         resultado.Fiwind!.exchange = "Fiwind";
         resultado.Letsbit!.exchange = "Letsbit";
-        resultado.Lemoncash!.exchange = "Lemon";
+        resultado.Lemon!.exchange = "Lemon";
         exchanges = new List<CriptoBase>
         {
             resultado.Belo,
-            resultado.Lemoncash,
+            resultado.Lemon,
             resultado.Buenbit,
             resultado.Fiwind,
             resultado.Letsbit
