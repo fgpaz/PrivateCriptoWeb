@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Models;
 
@@ -9,17 +8,10 @@ public class CriptoBase
     public CriptoBase()
     {
     }
-
-    public CriptoBase(CriptoBase criptoBase, string exchange)
-    {
-        comprar_USDT = criptoBase.comprar_USDT;
-        vender_USDT = criptoBase.vender_USDT;
-        fecha = criptoBase.fecha;
-        this.exchange = exchange;
-    }
+    
 
     [JsonProperty("totalAsk")] public double comprar_USDT { get; set; }
-    // [JsonProperty("totalAsk")] public double comprar_USDTs { get; set; }
+    
     [JsonProperty("totalBid")] public double vender_USDT { get; set; }
     [JsonProperty("time")] public long time { get; set; }
 

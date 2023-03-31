@@ -1,12 +1,12 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace Models;
 
 public class ExchangeRates
 {
-    [JsonPropertyName("belo")] public CriptoBase? Belo { get; set; }
-    [JsonPropertyName("letsbit")] public CriptoBase? Letsbit { get; set; }
-    [JsonPropertyName("fiwind")] public CriptoBase? Fiwind { get; set; }
-    [JsonPropertyName("lemoncash")] public CriptoBase? Lemoncash { get; set; }
-    [JsonPropertyName("buenbit")] public CriptoBase? Buenbit { get; set; }
+    [JsonProperty("belo")] public CriptoBase? Belo { get; set; }
+    [JsonProperty("letsbit")] public CriptoBase? Letsbit { get; set; }
+    [JsonProperty("fiwind")] public CriptoBase? Fiwind { get; set; }
+    [JsonProperty("lemoncash")] public CriptoBase? Lemon { get; set; }
+    [JsonProperty("buenbit")] public CriptoBase? Buenbit { get; set; }
 }
