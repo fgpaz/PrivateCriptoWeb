@@ -1,9 +1,10 @@
 ﻿@page "/usdt"
 @using DataAccess
 @using Models
+@using System.Globalization
 @inject ExchangesAccess ExchangesAccess
 
-<PageTitle>Weather forecast</PageTitle>
+<PageTitle>USDT ahora</PageTitle>
 
 <h1>Cripto</h1>
 
@@ -23,24 +24,37 @@ else
             <th>Date</th>
             <th>Comprar USDT</th>
             <th>Vender USDT</th>
-            <th>Vender USDT + 2%</th>
+            <th>x1400</th>
+            <th>Vender USDT + Cashback</th>
         </tr>
         </thead>
         <tbody>
+
         @foreach (var data in exchanges)
         {
             <tr>
                 <td>@data.exchange</td>
                 <td>@data.fecha</td>
-                <td>@data.comprar_USDT</td>
-                <td>@data.vender_USDT</td>
-                @if (data.exchange == "Belo")
+                <td>@data.comprar_USDT.ToString("C", culture)</td>
+                <td>@data.vender_USDT.ToString("C", culture)</td>
+                <td>@(data.vender_USDT * 1400)</td>
+                @switch (data.exchange)
                 {
-                    <td>@(data.vender_USDT * 1.02)</td>
-                }
-                else
-                {
-                    <td></td>
+                    case "Belo":
+                        <td>@((data.vender_USDT * 1.02).ToString("C", culture)) (2%)</td>
+                        break;
+                    case "Buenbit":
+                        <td>@((data.vender_USDT * 1.01).ToString("C", culture)) (1% hasta ARS$50.000/mes)</td>
+                        break;
+                    case "Letsbit":
+                        <td>@((data.vender_USDT * 1.025).ToString("C", culture)) (2.5% hasta ARS$40.000/mes)</td>
+                        break;
+                    case "Fiwind":
+                        <td>@((data.vender_USDT * 1).ToString("C", culture)) (0%)</td>
+                        break;
+                    default:
+                        <td></td>
+                        break;
                 }
             </tr>
         }
@@ -56,4 +70,5 @@ else
         exchanges = await ExchangesAccess.GetUSDTExchanges();
     }
 
+    readonly CultureInfo culture = new("en-US");
 }
