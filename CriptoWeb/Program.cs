@@ -1,6 +1,8 @@
 using System.Net;
 using CriptoWeb.Data;
 using DataAccess;
+using Microsoft.EntityFrameworkCore;
+using Models;
 using Polly;
 using Polly.Extensions.Http;
 
@@ -8,6 +10,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add appsettings.json
 builder.Configuration.AddJsonFile("appsettings.json", true, true);
+
+// Add DB connection
+var connectionString = builder.Configuration.GetConnectionString("LOCAL_DB");
+builder.Services.AddDbContext<CriptoDbContext>(options =>
+    options.UseSqlServer(connectionString));
 
 // Add HTTPClients
 builder.Services.AddHttpClient("CriptoYaExchanges", httpClient => { httpClient.BaseAddress = new Uri(builder.Configuration["CriptoYaExchanges"]!); })
